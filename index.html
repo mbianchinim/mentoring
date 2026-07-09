@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mentoria Líder Estratégico com Mateus Bianchini. Saia do operacional, domine métricas de fluxo e assuma liderança estratégica em 12 semanas. Sessão Estratégica Gratuita.">
+  <title>Mentoria Líder Estratégico | Mateus Bianchini</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%23062348' width='32' height='32' rx='6'/><text x='16' y='22' font-family='Georgia,serif' font-size='14' font-weight='700' fill='%23AC8362' text-anchor='middle'>MB</text></svg>">
+  <style>
+    /* Tipografia alinhada ao PDF de posicionamento: Open Sans (corpo) + Montserrat (títulos) */
+    :root {
+      --font-serif: 'Montserrat', system-ui, sans-serif;
+      --font-sans: 'Open Sans', system-ui, sans-serif;
+    }
+    em, .hero__title em, h2 em {
+      font-style: normal;
+      font-weight: 700;
+    }
+    .footer__links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .footer__links svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* Modal Sessão Estratégica */
+    .sessao-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .sessao-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .sessao-modal__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 25, 44, 0.82);
+      backdrop-filter: blur(4px);
+    }
+    .sessao-modal__dialog {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--white-pure);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(6, 35, 72, 0.1);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+      padding: 2rem;
+    }
+    .sessao-modal__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      border: none;
+      background: transparent;
+      color: var(--gray);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .sessao-modal__close:hover {
+      color: var(--navy);
+    }
+    .sessao-modal__header {
+      margin-bottom: 1.5rem;
+      padding-right: 2rem;
+    }
+    .sessao-modal__header h2 {
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+    }
+    .sessao-modal__header p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+    .sessao-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .sessao-form label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .sessao-form input,
+    .sessao-form select,
+    .sessao-form textarea {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid rgba(6, 35, 72, 0.15);
+      border-radius: var(--radius);
+      background: var(--white);
+      color: var(--navy);
+      transition: border-color var(--transition);
+    }
+    .sessao-form input:focus,
+    .sessao-form select:focus,
+    .sessao-form textarea:focus {
+      outline: none;
+      border-color: var(--bronze);
+    }
+    .sessao-form textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+    body.modal-open {
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Configurável: edite os links abaixo -->
+  <script>
+    window.SITE_CONFIG = {
+      linkedin: 'https://www.linkedin.com/in/mateusbianchini/',
+      whatsapp: '5548998259798',
+      email: 'mailto:mateusbianchini@hotmail.com'
+    };
+  </script>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#inicio" class="logo">Mateus Bianchini</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="#dores">Desafios</a>
+        <a href="#metodo">Método</a>
+        <a href="#trajetoria">Trajetória</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#faq">FAQ</a>
+        <a href="#" class="nav__cta" data-sessao-modal>Agendar Sessão</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- SEÇÃO 1: HERO -->
+    <section class="hero section--dark" id="inicio">
+      <div class="container hero__grid">
+        <div class="hero__content reveal">
+          <div class="section-label">
+            <span>Exclusivo para</span>
+            <span>Agile Leads · PMs · PMO · Engineering Manager</span>
+          </div>
+          <h1 class="hero__title">
+            Deixe de ser apenas o 'facilitador de reuniões'. Assuma o papel de <em>líder estratégico</em>.
+          </h1>
+          <p class="hero__subtitle">
+            Ganhe maturidade executiva, domine métricas de fluxo real e multiplique sua influência em até 12 semanas. Tudo aplicado diretamente no seu contexto atual de trabalho, sem teorias genéricas.
+          </p>
+          <p class="hero__proof">
+            +6 anos em Gestão Lean Agile<br>
+            Startups · PMEs · Enterprise
+          </p>
+          <a href="#" class="btn btn--primary" data-sessao-modal>Agendar Sessão Estratégica Gratuita</a>
+        </div>
+        <div class="hero__visual reveal">
+          <div class="hero__image-wrap">
+            <img src="assets/img/hero.jpg" alt="Mateus Bianchini, mentor em liderança ágil e flow performance" width="480" height="640" loading="eager">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: AGITAÇÃO DE DORES -->
+    <section class="pillars section--light" id="dores">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label section-label--dark">
+            <span>O que trava</span>
+            <span>Seu próximo nível</span>
+          </div>
+          <h2>Se você se reconhece aqui, a mentoria foi desenhada para você</h2>
+          <p class="section-intro">Três cenários que aparecem em praticamente toda conversa com líderes ágeis. Ninguém resolve isso só com mais certificação.</p>
+        </div>
+        <div class="pillars__grid">
+          <article class="pillar-card reveal">
+            <span class="pillar-card__tag">Cenário 01</span>
+            <h3>Rotina sobrecarregada</h3>
+            <p>Você apaga incêndio o dia inteiro: Slack, urgências, rituais intermináveis. Mesmo assim, nada avança de forma estrutural. O operacional consome 100% da sua energia.</p>
+          </article>
+          <article class="pillar-card reveal">
+            <span class="pillar-card__tag">Cenário 02</span>
+            <h3>Invisibilidade executiva</h3>
+            <p>Perante a diretoria, você ainda é visto como o profissional que "organiza a cerimônia", não como alguém que influencia decisões, prioridades e resultados de negócio.</p>
+          </article>
+          <article class="pillar-card reveal">
+            <span class="pillar-card__tag">Cenário 03</span>
+            <h3>Falta de embasamento</h3>
+            <p>Quando precisa defender uma mudança ou pedir investimento, você não tem métricas sólidas de fluxo nem narrativa executiva para provar o valor do que propõe.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: O MÉTODO -->
+    <section class="mentoria section--dark" id="metodo">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">
+            <span>Método</span>
+            <span>Full Stack Flow</span>
+          </div>
+          <h2>5 pilares para sair do operacional e liderar com <em>dados e influência</em></h2>
+          <p class="section-intro section-intro--light">
+            Metodologia aplicada no seu contexto real. Sem slide genérico, sem framework decorativo. Cada pilar vira decisão e entrega na sua operação.
+          </p>
+        </div>
+
+        <div class="mentoria__grid">
+          <div class="mentoria__content reveal">
+            <div class="pillars-list">
+              <div class="pillar-item">
+                <span class="pillar-item__num">01</span>
+                <div>
+                  <h4>Business Agility</h4>
+                  <p>Conectar entrega ao negócio: alinhar squads, OKRs e governança para que agilidade deixe de ser buzzword e vire resultado mensurável.</p>
+                </div>
+              </div>
+              <div class="pillar-item">
+                <span class="pillar-item__num">02</span>
+                <div>
+                  <h4>Flow Performance</h4>
+                  <p>Leitura end-to-end de fluxo para enxergar gargalos antes que virem crise na review.</p>
+                </div>
+              </div>
+              <div class="pillar-item">
+                <span class="pillar-item__num">03</span>
+                <div>
+                  <h4>Gestão Prática de Fluxo</h4>
+                  <p>DoR, DoD, acordos e estabilização operacional. Previsibilidade real, não promessa de velocity.</p>
+                </div>
+              </div>
+              <div class="pillar-item">
+                <span class="pillar-item__num">04</span>
+                <div>
+                  <h4>Influência e Presença Executiva</h4>
+                  <p>Narrativas com dados, trade-offs claros e conversas difíceis com produto, engenharia e liderança. Sem depender de carisma vazio.</p>
+                </div>
+              </div>
+              <div class="pillar-item">
+                <span class="pillar-item__num">05</span>
+                <div>
+                  <h4>Carreira e Posicionamento Premium</h4>
+                  <p>Portfólio de impacto, posicionamento estratégico e plano de 90 dias para ser visto e remunerado como líder sênior de verdade.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="mentoria__aside reveal">
+            <div class="info-card">
+              <h3>Como funciona</h3>
+              <ul class="check-list">
+                <li>12 semanas com aplicação guiada</li>
+                <li>6 encontros ao vivo</li>
+                <li>Missões semanais no seu contexto real</li>
+                <li>Grupo privado com suporte assíncrono</li>
+                <li>Diagnóstico individual de maturidade</li>
+              </ul>
+              <div class="info-card__price">
+                <span class="info-card__label">Seleção por ciclo</span>
+                <p class="info-card__value">Vagas limitadas por ciclo. <span>A seleção é feita exclusivamente via Diagnóstico Estratégico.</span></p>
+              </div>
+              <a href="#" class="btn btn--primary btn--full" data-sessao-modal>Agendar Sessão Estratégica Gratuita</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: AUTORIDADE COM CONEXÃO HUMANA -->
+    <section class="trajetoria section--dark" id="trajetoria">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">
+            <span>Trajetória</span>
+            <span>Quem conduz a mentoria</span>
+          </div>
+          <h2>Experiência em escala corporativa, com a empatia de quem já passou por isso</h2>
+          <blockquote class="intro-quote">
+            Eu já estive exatamente onde você está hoje: trabalhando 10 horas por dia, participando de rituais intermináveis e sentindo que, apesar do esforço brutal, eu era visto apenas como o operacional que "facilita reuniões". O que me fez virar o jogo, destravar promoções e liderar operações de mais de 180 pessoas foi entender o sistema, dominar os dados de fluxo e mudar meu posicionamento. É esse caminho exato, sem atalhos teóricos, que eu vou desenhar com você.
+          </blockquote>
+        </div>
+
+        <div class="stats reveal">
+          <div class="stat">
+            <span class="stat__value">150+</span>
+            <span class="stat__label">colaboradores em governança de delivery</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">Top 5</span>
+            <span class="stat__label">Agile Trends Brasil 2024</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">+25%</span>
+            <span class="stat__label">eficiência de entrega</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">292</span>
+            <span class="stat__label">entregas em case premiado</span>
+          </div>
+        </div>
+
+        <div class="award reveal">
+          <div class="award__badge">Top 5</div>
+          <div class="award__content">
+            <h3>Agilidade Brasil · Categoria Tribos</h3>
+            <p>Case Smiles com 180+ colaboradores e 292 entregas estratégicas. Processos, qualidade, custo e estratégia alinhados.</p>
+          </div>
+        </div>
+
+        <div class="timeline reveal">
+          <article class="timeline__item">
+            <div class="timeline__period">jun/2026 a presente</div>
+            <div class="timeline__body">
+              <h3>Businessmap Brasil</h3>
+              <span class="timeline__role">Customer Success Consultant</span>
+              <p>CS enterprise B2B: adoção, expansão e retenção. Conectar uso da plataforma a outcomes de negócio.</p>
+            </div>
+          </article>
+          <article class="timeline__item">
+            <div class="timeline__period">jun/2025 a jun/2026</div>
+            <div class="timeline__body">
+              <h3>Thomson Reuters</h3>
+              <span class="timeline__role">Business System Analyst</span>
+              <p>Governança em 12 squads. PI Planning, fórum VP quinzenal, dashboards exec/tático/operacional. Redução de 20 dias no tempo de entrega. PDLC com IA.</p>
+            </div>
+          </article>
+          <article class="timeline__item">
+            <div class="timeline__period">jun/2023 a jun/2025</div>
+            <div class="timeline__body">
+              <h3>Smiles</h3>
+              <span class="timeline__role">Agile Consultant</span>
+              <p>App mobile Smiles, login unificado GOL|Smiles, evolução KMM e OKRs.</p>
+            </div>
+          </article>
+          <article class="timeline__item">
+            <div class="timeline__period">fev/2022 a jun/2023</div>
+            <div class="timeline__body">
+              <h3>Smiles</h3>
+              <span class="timeline__role">Agile Master</span>
+              <p>2 squads cross-funcionais. Kanban, lead time, WIP.</p>
+            </div>
+          </article>
+          <article class="timeline__item">
+            <div class="timeline__period">nov/2019 a fev/2022</div>
+            <div class="timeline__body">
+              <h3>Nkey</h3>
+              <span class="timeline__role">Scrum Master</span>
+              <p>Startups, software-house, múltiplos clientes. +50% value delivery, +40% produtividade.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="tags reveal">
+          <span>Product Operations</span>
+          <span>Business Analysis</span>
+          <span>Agile &amp; Flow Management</span>
+          <span>Digital Transformation</span>
+          <span>Metrics &amp; Analytics</span>
+        </div>
+
+        <div class="credentials reveal">
+          <div class="credentials__col">
+            <h4>Formação</h4>
+            <ul>
+              <li>MBA Inovação e Gestão Ágil · XP Educação</li>
+              <li>Management · University of London</li>
+              <li>Product Management · Cubos Academy</li>
+              <li>Direito · Faculdade Cesusc</li>
+            </ul>
+          </div>
+          <div class="credentials__col">
+            <h4>Certificações</h4>
+            <ul>
+              <li>Kanban Management Professional</li>
+              <li>Kanban System Design</li>
+              <li>Gestão de TI · UX/UI Designer</li>
+            </ul>
+          </div>
+          <div class="credentials__col">
+            <h4>Idiomas</h4>
+            <ul>
+              <li>Português (nativo)</li>
+              <li>Inglês (profissional)</li>
+              <li>Espanhol (profissional completo)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="trajetoria__cta reveal">
+          <a href="#" class="btn btn--primary" data-sessao-modal>Quero aplicar para a mentoria</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5: PROVA SOCIAL -->
+    <section class="social-proof section--dark" id="depoimentos">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">
+            <span>Credibilidade</span>
+            <span>Entrega comprovada</span>
+          </div>
+          <h2>Impacto validado por líderes que estavam no mesmo ponto que você</h2>
+        </div>
+
+        <div class="testimonials__grid reveal">
+          <article class="testimonial">
+            <div class="testimonial__stars" aria-label="5 estrelas">★★★★★</div>
+            <blockquote>
+              Deu certo… estou muito feliz e você contribuiu muito! Obrigada por me fazer ver meus pontos fortes, ser mais estratégica e abrir meus olhos. <em>Você é um mentor 1000.</em>
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/mariana-montenegro.png" alt="Mariana Montenegro" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Mariana Montenegro</cite>
+                <span>Aprovada vaga PMO | EY</span>
+              </div>
+            </footer>
+          </article>
+          <article class="testimonial">
+            <div class="testimonial__stars" aria-label="5 estrelas">★★★★★</div>
+            <blockquote>
+              Insights para melhorar minha performance como PO. Reestruturei upstream e downstream, estreitei relação com PMs e identifiquei gargalos — elaborando propostas de melhoria.
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/michele-salles.png" alt="Michele Salles" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Michele Salles</cite>
+                <span>Product Owner · Equals</span>
+              </div>
+            </footer>
+          </article>
+          <article class="testimonial">
+            <div class="testimonial__stars" aria-label="5 estrelas">★★★★★</div>
+            <blockquote>
+              Troca muito bacana e expertise do mentor em testes regressivos. Consegui resultados na evolução ágil que estou liderando.
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/edson-miranda.png" alt="Edson Miranda" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Edson Miranda</cite>
+                <span>Coord. Sistemas · CredSystems</span>
+              </div>
+            </footer>
+          </article>
+          <article class="testimonial">
+            <blockquote>
+              Liderança fora de série, excelente comunicador. Recomendo — sabe dar excelentes mentorias para agilidade, projetos e produtos.
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/ronald-petrotheli.png" alt="Ronald Petrotheli" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Ronald Petrotheli</cite>
+                <span>Gerente de Projetos · PMO</span>
+              </div>
+            </footer>
+          </article>
+          <article class="testimonial">
+            <blockquote>
+              Me ajudou em uma fase de transição de carreira — direcionando habilidades, competências-chave e posicionamento na prática. <em>Profissional ímpar e mente brilhante.</em>
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/leonardo-laguna.png" alt="Leonardo Laguna" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Leonardo Laguna</cite>
+                <span>Product Manager</span>
+              </div>
+            </footer>
+          </article>
+          <article class="testimonial">
+            <blockquote>
+              Direcionamento fundamental sobre gestão, consegue abordar o Ágil além do Software.
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/meguy-prado.png" alt="Meguy Prado" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Meguy Prado</cite>
+                <span>PM Knowledge · PMBASIS</span>
+              </div>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6: FAQ -->
+    <section class="metodo section--dark" id="faq">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">
+            <span>Dúvidas</span>
+            <span>Antes de aplicar</span>
+          </div>
+          <h2>Perguntas frequentes</h2>
+          <p class="section-intro section-intro--light">Objeções comuns, respondidas de forma direta.</p>
+        </div>
+
+        <div class="pillars-list reveal" style="max-width: 760px; margin: 0 auto;">
+          <details class="pillar-item" style="cursor: pointer;">
+            <summary style="list-style: none; cursor: pointer;">
+              <h4 style="display: inline; font-family: var(--font-serif); font-size: 1.05rem;">Serve para empresas com processos caóticos?</h4>
+            </summary>
+            <p style="margin-top: 0.75rem; padding-left: 0;">Sim. É justamente onde a mentoria mais entrega valor. O método não exige maturidade prévia: ele parte do caos real, mapeia fluxo, estabiliza políticas e constrói narrativa com dados. Se sua operação é imprevisível hoje, você está no perfil ideal.</p>
+          </details>
+          <details class="pillar-item" style="cursor: pointer;">
+            <summary style="list-style: none; cursor: pointer;">
+              <h4 style="display: inline; font-family: var(--font-serif); font-size: 1.05rem;">Quanto tempo preciso dedicar por semana?</h4>
+            </summary>
+            <p style="margin-top: 0.75rem; padding-left: 0;">O ciclo dura 12 semanas. A expectativa é de 2 a 3 horas semanais: missões aplicadas no seu trabalho e participação nos 6 encontros ao vivo. Tudo foi desenhado para quem já está no operacional.</p>
+          </details>
+          <details class="pillar-item" style="cursor: pointer;">
+            <summary style="list-style: none; cursor: pointer;">
+              <h4 style="display: inline; font-family: var(--font-serif); font-size: 1.05rem;">Como funciona a Sessão Estratégica Gratuita?</h4>
+            </summary>
+            <p style="margin-top: 0.75rem; padding-left: 0;">É uma conversa de diagnóstico (cerca de 45 minutos) para mapear seu contexto, identificar onde você está travado e avaliar se a mentoria faz sentido para o seu momento. Sem pitch agressivo. Se não for fit, você sai com clareza mesmo assim.</p>
+          </details>
+          <details class="pillar-item" style="cursor: pointer;">
+            <summary style="list-style: none; cursor: pointer;">
+              <h4 style="display: inline; font-family: var(--font-serif); font-size: 1.05rem;">É individual ou em grupo?</h4>
+            </summary>
+            <p style="margin-top: 0.75rem; padding-left: 0;">A seleção e o diagnóstico são individuais, com personalização total ao seu contexto real de trabalho. A mentoria combina missões aplicadas no seu dia a dia, encontros ao vivo e acesso à comunidade de líderes estratégicos para troca entre pares de alto nível. Você evolui no seu cenário, sem conteúdo genérico em massa.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 7: CTA FINAL -->
+    <section class="contato section--light" id="contato">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label section-label--dark">
+            <span>Próximo passo</span>
+            <span>Diagnóstico Estratégico</span>
+          </div>
+          <h2>Aplique para a Sessão Estratégica Gratuita</h2>
+          <p class="section-intro">Vagas limitadas por ciclo. A seleção acontece exclusivamente via diagnóstico. Garanta sua conversa antes do próximo grupo fechar.</p>
+        </div>
+
+        <div class="reveal" style="max-width: 520px; margin: 0 auto;">
+          <div class="info-card info-card--light">
+            <h3>Mentoria Líder Estratégico</h3>
+            <ul class="check-list check-list--dark">
+              <li>Sessão estratégica gratuita e sem compromisso</li>
+              <li>Diagnóstico do seu contexto e maturidade atual</li>
+              <li>Plano inicial de evolução personalizado</li>
+              <li>Seleção para o próximo ciclo da mentoria</li>
+            </ul>
+            <div class="info-card__price">
+              <span class="info-card__label">Seleção por ciclo</span>
+              <p class="info-card__value" style="font-size: 1.1rem;">Vagas limitadas por ciclo. <span style="display: inline; font-size: 0.9rem;">A seleção é feita exclusivamente via Diagnóstico Estratégico.</span></p>
+            </div>
+            <a href="#" class="btn btn--primary btn--full" data-sessao-modal>Agendar Sessão Estratégica Gratuita</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer section--dark">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <strong>Mateus Bianchini</strong>
+        <p>Mentoria Líder Estratégico · Full Stack Flow</p>
+      </div>
+      <div class="footer__links">
+        <a href="#" data-cta="email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/></svg>
+          mateusbianchini@hotmail.com
+        </a>
+        <a href="#" data-cta="linkedin">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <p class="footer__copy">&copy; 2026 Mateus Bianchini. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="sessao-modal" id="sessaoModal" aria-hidden="true" role="dialog" aria-labelledby="sessaoModalTitle">
+    <div class="sessao-modal__overlay" data-sessao-close></div>
+    <div class="sessao-modal__dialog">
+      <button type="button" class="sessao-modal__close" data-sessao-close aria-label="Fechar">&times;</button>
+      <div class="sessao-modal__header">
+        <h2 id="sessaoModalTitle">Sessão Estratégica Gratuita</h2>
+        <p>Responda em 1 minuto. Suas respostas serão enviadas para o WhatsApp e retornamos em até 24h úteis.</p>
+      </div>
+      <form class="sessao-form" id="sessaoForm">
+        <label>
+          Nome completo
+          <input type="text" name="nome" required autocomplete="name" placeholder="Seu nome">
+        </label>
+        <label>
+          E-mail
+          <input type="email" name="email" required autocomplete="email" placeholder="seu@email.com">
+        </label>
+        <label>
+          Cargo / função atual
+          <select name="cargo" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="Agile Lead">Agile Lead</option>
+            <option value="PM">PM</option>
+            <option value="PMO">PMO</option>
+            <option value="Engineering Manager">Engineering Manager</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </label>
+        <label>
+          Faixa salarial
+          <select name="faixa_salarial" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="Até R$ 12.000">Até R$ 12.000</option>
+            <option value="R$ 12.000 a R$ 18.000">R$ 12.000 a R$ 18.000</option>
+            <option value="R$ 18.000 a R$ 25.000">R$ 18.000 a R$ 25.000</option>
+            <option value="R$ 25.000 a R$ 35.000">R$ 25.000 a R$ 35.000</option>
+            <option value="Acima de R$ 35.000">Acima de R$ 35.000</option>
+          </select>
+        </label>
+        <label>
+          Empresa
+          <input type="text" name="empresa" required placeholder="Onde você trabalha hoje">
+        </label>
+        <label>
+          Qual seu maior desafio hoje?
+          <textarea name="desafio" required placeholder="Ex.: invisibilidade com a diretoria, operação caótica, falta de métricas..."></textarea>
+        </label>
+        <label>
+          O que você espera resolver com a mentoria?
+          <textarea name="expectativa" required placeholder="Seja específico sobre o resultado que busca nos próximos 90 dias"></textarea>
+        </label>
+        <button type="submit" class="btn btn--primary btn--full">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      var modal = document.getElementById('sessaoModal');
+      var form = document.getElementById('sessaoForm');
+      var whatsapp = (window.SITE_CONFIG && window.SITE_CONFIG.whatsapp) || '5548998259798';
+
+      function openModal(e) {
+        if (e) e.preventDefault();
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        var first = form.querySelector('input, select, textarea');
+        if (first) setTimeout(function () { first.focus(); }, 100);
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+      }
+
+      document.querySelectorAll('[data-sessao-modal]').forEach(function (btn) {
+        btn.addEventListener('click', openModal);
+      });
+
+      document.querySelectorAll('[data-sessao-close]').forEach(function (el) {
+        el.addEventListener('click', closeModal);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var data = new FormData(form);
+        var msg = [
+          'Olá Mateus! Quero agendar a Sessão Estratégica da Mentoria Líder Estratégico.',
+          '',
+          '*Nome:* ' + data.get('nome'),
+          '*E-mail:* ' + data.get('email'),
+          '*Cargo:* ' + data.get('cargo'),
+          '*Faixa salarial:* ' + data.get('faixa_salarial'),
+          '*Empresa:* ' + data.get('empresa'),
+          '*Maior desafio:* ' + data.get('desafio'),
+          '*Expectativa com a mentoria:* ' + data.get('expectativa')
+        ].join('\n');
+
+        window.open('https://wa.me/' + whatsapp + '?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
+        closeModal();
+        form.reset();
+      });
+    })();
+  </script>
+</body>
+</html>
