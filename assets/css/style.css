@@ -33,6 +33,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-h);
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -50,6 +51,12 @@ body {
   color: var(--navy);
   background: var(--white);
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  width: 100%;
+}
+
+main {
+  overflow-x: clip;
 }
 
 img {
@@ -70,6 +77,7 @@ ul { list-style: none; }
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 1.5rem;
+  min-width: 0;
 }
 
 /* ---- Section themes ---- */
@@ -239,6 +247,17 @@ em, .hero__title em, h2 em {
   border: 2px solid transparent;
   cursor: pointer;
   transition: all var(--transition);
+  text-align: center;
+  line-height: 1.35;
+}
+
+.btn--full {
+  width: 100%;
+  display: flex;
+}
+
+.btn--session {
+  max-width: 100%;
 }
 
 .btn--primary {
@@ -273,10 +292,6 @@ em, .hero__title em, h2 em {
   color: var(--navy);
 }
 
-.btn--full {
-  width: 100%;
-}
-
 /* ---- Hero ---- */
 .hero {
   padding-top: calc(var(--header-h) + 3rem);
@@ -291,6 +306,40 @@ em, .hero__title em, h2 em {
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: center;
+  min-width: 0;
+}
+
+.hero__content {
+  min-width: 0;
+}
+
+.hero__audience {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-light);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(172, 131, 98, 0.35);
+  line-height: 1.5;
+}
+
+.hero__audience-label {
+  display: block;
+}
+
+.hero__audience-roles {
+  display: block;
+  letter-spacing: 0.06em;
+  line-height: 1.65;
+  text-transform: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--bronze-light);
 }
 
 .hero__title {
@@ -366,6 +415,26 @@ em, .hero__title em, h2 em {
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   align-items: stretch;
+  min-width: 0;
+}
+
+.pillars__grid--4 {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .pillars__grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .pillars__grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
 }
 
 .pillar-card {
@@ -489,6 +558,15 @@ em, .hero__title em, h2 em {
   padding: 2rem;
   position: sticky;
   top: calc(var(--header-h) + 1.5rem);
+  min-width: 0;
+}
+
+.info-card .btn,
+.info-card--light .btn {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-self: stretch;
 }
 
 .info-card h3 {
@@ -1121,6 +1199,14 @@ em, .hero__title em, h2 em {
     grid-template-columns: 1fr;
   }
 
+  .hero__grid > *,
+  .mentoria__grid > *,
+  .metodo__grid > *,
+  .carreira__grid > *,
+  .pillars__grid > * {
+    min-width: 0;
+  }
+
   .hero__visual {
     order: -1;
     max-width: 400px;
@@ -1155,8 +1241,62 @@ em, .hero__title em, h2 em {
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0 1.125rem;
+  }
+
   section {
     padding: 3.5rem 0;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero__audience-roles {
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+  }
+
+  .hero__content .btn--session {
+    display: flex;
+    width: 100%;
+  }
+
+  .btn--session {
+    font-size: 0.82rem;
+    padding: 0.875rem 1.125rem;
+    white-space: normal;
+    hyphens: none;
+  }
+
+  .section-label {
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    letter-spacing: 0.12em;
+  }
+
+  .pillar-card {
+    padding: 1.35rem 1.15rem;
+  }
+
+  #bonus-ia .pillar-card {
+    padding: 1.15rem 1rem;
+  }
+
+  #bonus-ia .pillar-card h3 {
+    font-size: 1.05rem;
+  }
+
+  #bonus-ia .pillar-card p {
+    font-size: 0.875rem;
+    line-height: 1.55;
+  }
+
+  .info-card,
+  .info-card--light {
+    padding: 1.5rem;
   }
 
   .nav-toggle {
@@ -1218,5 +1358,26 @@ em, .hero__title em, h2 em {
   .award {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-label {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .stat {
+    padding: 0.875rem 0.5rem;
+  }
+
+  .stat__value {
+    font-size: 1.75rem;
   }
 }

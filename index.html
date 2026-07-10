@@ -138,14 +138,6 @@
     }
 
     /* Bônus I.A. */
-    .pillars__grid--4 {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    @media (min-width: 992px) {
-      .pillars__grid--4 {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
     .bonus-showcase {
       display: grid;
       grid-template-columns: 1fr;
@@ -334,10 +326,10 @@
     <section class="hero section--dark" id="inicio">
       <div class="container hero__grid">
         <div class="hero__content reveal">
-          <div class="section-label">
-            <span>Exclusivo para</span>
-            <span>Agile Leads · PMs · PMO · Engineering Manager</span>
-          </div>
+          <p class="hero__audience">
+            <span class="hero__audience-label">Exclusivo para</span>
+            <span class="hero__audience-roles">Agile Leads · PMs · PMO · Engineering Manager</span>
+          </p>
           <h1 class="hero__title">
             Deixe de ser apenas o 'facilitador de reuniões'. Assuma o papel de <em>líder estratégico</em>.
           </h1>
@@ -348,7 +340,7 @@
             +6 anos em Gestão Lean Agile<br>
             Startups · PMEs · Enterprise
           </p>
-          <a href="#" class="btn btn--primary" data-sessao-modal>Agendar Sessão Estratégica Gratuita</a>
+          <a href="#" class="btn btn--primary btn--session" data-sessao-modal>Agendar Sessão Estratégica Gratuita</a>
         </div>
         <div class="hero__visual reveal">
           <div class="hero__image-wrap">
@@ -457,7 +449,7 @@
                 <span class="info-card__label">Seleção por ciclo</span>
                 <p class="info-card__value">Vagas limitadas por ciclo. <span>A seleção é feita exclusivamente via Diagnóstico Estratégico.</span></p>
               </div>
-              <a href="#" class="btn btn--primary btn--full" data-sessao-modal>Agendar Sessão Estratégica Gratuita</a>
+              <a href="#" class="btn btn--primary btn--full btn--session" data-sessao-modal>Agendar Sessão Estratégica Gratuita</a>
             </div>
           </aside>
         </div>
@@ -830,7 +822,7 @@
               <span class="info-card__label">Seleção por ciclo</span>
               <p class="info-card__value" style="font-size: 1.1rem;">Vagas limitadas por ciclo. <span style="display: inline; font-size: 0.9rem;">A seleção é feita exclusivamente via Diagnóstico Estratégico.</span></p>
             </div>
-            <a href="#" class="btn btn--primary btn--full" data-sessao-modal>Agendar Sessão Estratégica Gratuita</a>
+            <a href="#" class="btn btn--primary btn--full btn--session" data-sessao-modal>Agendar Sessão Estratégica Gratuita</a>
           </div>
         </div>
       </div>
