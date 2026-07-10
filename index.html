@@ -135,6 +135,168 @@
     body.modal-open {
       overflow: hidden;
     }
+
+    /* Bônus I.A. */
+    .pillars__grid--4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 992px) {
+      .pillars__grid--4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .bonus-showcase {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin: 3rem 0;
+    }
+    @media (min-width: 768px) {
+      .bonus-showcase {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .bonus-showcase__item {
+      background: var(--white-pure);
+      border: 1px solid rgba(6, 35, 72, 0.08);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .bonus-showcase__item:hover {
+      border-color: var(--bronze);
+      box-shadow: 0 12px 40px rgba(6, 35, 72, 0.08);
+    }
+    .bonus-showcase__item img {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      object-position: top center;
+      border-bottom: 1px solid rgba(6, 35, 72, 0.06);
+    }
+    .bonus-showcase__item--contain img {
+      object-fit: contain;
+      background: #1a1d24;
+      padding: 0.5rem;
+    }
+    .bonus-showcase__caption {
+      padding: 1rem 1.25rem 1.25rem;
+    }
+    .bonus-showcase__caption strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: var(--navy);
+    }
+    .bonus-showcase__caption span {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+    .bonus-story {
+      margin-bottom: 3rem;
+    }
+    .bonus-story:last-of-type {
+      margin-bottom: 0;
+    }
+    .bonus-story h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .bonus-story p {
+      color: var(--gray);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    .bonus-story ul {
+      margin: 1rem 0;
+    }
+    .bonus-story ul li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .bonus-story ul li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--bronze);
+      font-weight: 700;
+    }
+    .bonus-story__insight {
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      background: rgba(172, 131, 98, 0.1);
+      border-left: 3px solid var(--bronze);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 0.9rem;
+      color: var(--navy);
+      line-height: 1.6;
+    }
+    .bonus-journey {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    .bonus-journey__step {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--white-pure);
+      border: 1px solid rgba(6, 35, 72, 0.08);
+      border-radius: var(--radius);
+      border-left: 3px solid var(--bronze);
+    }
+    .bonus-journey__num {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      color: var(--bronze);
+      flex-shrink: 0;
+    }
+    .bonus-journey__step p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .bonus-case {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(172, 131, 98, 0.25);
+    }
+    .bonus-case__tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bronze-light);
+      margin-bottom: 0.75rem;
+    }
+    .bonus-case h3 {
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+    }
+    .bonus-case p {
+      font-size: 0.9rem;
+      color: var(--gray-light);
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+    .bonus-case p:last-child {
+      margin-bottom: 0;
+    }
+    .bonus-cta {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
   </style>
 </head>
 <body>
@@ -157,8 +319,9 @@
       <nav class="nav" id="nav">
         <a href="#dores">Desafios</a>
         <a href="#metodo">Método</a>
-        <a href="#trajetoria">Trajetória</a>
+        <a href="#bonus-ia">Bônus</a>
         <a href="#depoimentos">Depoimentos</a>
+        <a href="#trajetoria">Trajetória</a>
         <a href="#faq">FAQ</a>
         <a href="#" class="nav__cta" data-sessao-modal>Agendar Sessão</a>
       </nav>
@@ -300,7 +463,181 @@
       </div>
     </section>
 
-    <!-- SEÇÃO 4: AUTORIDADE COM CONEXÃO HUMANA -->
+    <!-- BÔNUS: I.A. PARA GESTÃO -->
+    <section class="pillars section--light" id="bonus-ia">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label section-label--dark">
+            <span>Bônus</span>
+            <span>Incluso na mentoria</span>
+          </div>
+          <h2>I.A. para gestão: visibilidade que vira <em>decisão</em></h2>
+          <p class="section-intro">Bônus da mentoria: aprender a transformar dados de Jira, DevOps e ferramentas de gestão em leitura operacional, automações e agentes no seu contexto.</p>
+        </div>
+
+        <div class="pillars__grid pillars__grid--4 reveal">
+          <article class="pillar-card">
+            <span class="pillar-card__tag">01</span>
+            <h3>Dashboards e planilhas</h3>
+            <p>Flow metrics e planejado vs realizado. O foco é provocar conversa e decisão, não encher tela.</p>
+          </article>
+          <article class="pillar-card">
+            <span class="pillar-card__tag">02</span>
+            <h3>Projetos colaborativos</h3>
+            <p>Painéis e decks compartilháveis com time e liderança. Visibilidade que escala além de quem montou.</p>
+          </article>
+          <article class="pillar-card">
+            <span class="pillar-card__tag">03</span>
+            <h3>Automação</h3>
+            <p>Scripts e integrações que mantêm indicadores vivos sem retrabalho manual toda semana.</p>
+          </article>
+          <article class="pillar-card">
+            <span class="pillar-card__tag">04</span>
+            <h3>Agentes</h3>
+            <p>Cloud agents que rodam fluxos completos: status report, sync com ferramentas de gestão e análise entregue por e-mail.</p>
+          </article>
+        </div>
+
+        <div class="bonus-showcase reveal">
+          <figure class="bonus-showcase__item">
+            <img src="assets/img/bonus/flow-metrics.png" alt="Dashboard Flow Metrics" loading="lazy">
+            <figcaption class="bonus-showcase__caption">
+              <strong>Flow Metrics</strong>
+              <span>Percentis, throughput e composição da sprint.</span>
+            </figcaption>
+          </figure>
+          <figure class="bonus-showcase__item">
+            <img src="assets/img/bonus/sprint-health.png" alt="Sprint Health Check" loading="lazy">
+            <figcaption class="bonus-showcase__caption">
+              <strong>Sprint Health Check</strong>
+              <span>Leitura padronizada com ações por prioridade.</span>
+            </figcaption>
+          </figure>
+          <figure class="bonus-showcase__item bonus-showcase__item--contain">
+            <img src="assets/img/bonus/automations.png" alt="Automação de status report com análise diária por e-mail" loading="lazy">
+            <figcaption class="bonus-showcase__caption">
+              <strong>Cloud agents</strong>
+              <span>Status report automatizado: sync de dados, consolidação e análise recebida por e-mail toda manhã.</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="bonus-case reveal">
+          <span class="bonus-case__tag">Case enterprise</span>
+          <h3>Coord. Processos e Projetos · Operadora de Telecom</h3>
+          <p>Entrou com portfolio de milhares de cartões, aprovações espalhadas e indicadores que não refletiam a operação. Saiu com visibilidade de capacidade, apontamento estruturado e leitura que a liderança usa para decidir prioridade, não só acompanhar status.</p>
+        </div>
+
+        <div class="bonus-cta reveal">
+          <a href="#" class="btn btn--outline" data-sessao-modal>Quero ver se encaixa no meu contexto</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: PROVA SOCIAL -->
+    <section class="social-proof section--dark" id="depoimentos">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-label">
+            <span>Credibilidade</span>
+            <span>Entrega comprovada</span>
+          </div>
+          <h2>Impacto validado por líderes que estavam no mesmo ponto que você</h2>
+        </div>
+
+        <div class="testimonials__grid reveal">
+          <article class="testimonial">
+            <div class="testimonial__stars" aria-label="5 estrelas">★★★★★</div>
+            <blockquote>
+              Deu certo… estou muito feliz e você contribuiu muito! Obrigada por me fazer ver meus pontos fortes, ser mais estratégica e abrir meus olhos. <em>Você é um mentor 1000.</em>
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/mariana-montenegro.png" alt="Mariana Montenegro" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Mariana Montenegro</cite>
+                <span>Aprovada vaga PMO | EY</span>
+              </div>
+            </footer>
+          </article>
+          <article class="testimonial">
+            <div class="testimonial__stars" aria-label="5 estrelas">★★★★★</div>
+            <blockquote>
+              Insights para melhorar minha performance como PM. Reestruturei upstream e downstream, estreitei relação com PMs e identifiquei gargalos, elaborando propostas de melhoria.
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/michele-salles.png" alt="Michele Salles" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Michele Salles</cite>
+                <span>Product Manager · Equals</span>
+              </div>
+            </footer>
+          </article>
+          <article class="testimonial">
+            <div class="testimonial__stars" aria-label="5 estrelas">★★★★★</div>
+            <blockquote>
+              Troca muito bacana e expertise do mentor em testes regressivos. Consegui resultados na evolução ágil que estou liderando.
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/edson-miranda.png" alt="Edson Miranda" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Edson Miranda</cite>
+                <span>Coord. Sistemas · CredSystems</span>
+              </div>
+            </footer>
+          </article>
+          <article class="testimonial">
+            <blockquote>
+              Liderança fora de série, excelente comunicador. Recomendo — sabe dar excelentes mentorias para agilidade, projetos e produtos.
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/ronald-petrotheli.png" alt="Ronald Petrotheli" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Ronald Petrotheli</cite>
+                <span>Gerente de Projetos · PMO</span>
+              </div>
+            </footer>
+          </article>
+          <article class="testimonial">
+            <blockquote>
+              Me ajudou em uma fase de transição de carreira — direcionando habilidades, competências-chave e posicionamento na prática. <em>Profissional ímpar e mente brilhante.</em>
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/leonardo-laguna.png" alt="Leonardo Laguna" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Leonardo Laguna</cite>
+                <span>Product Manager</span>
+              </div>
+            </footer>
+          </article>
+          <article class="testimonial">
+            <blockquote>
+              Direcionamento fundamental sobre gestão, consegue abordar o Ágil além do Software.
+            </blockquote>
+            <footer>
+              <div class="testimonial__avatar testimonial__avatar--photo">
+                <img src="assets/img/testimonials/meguy-prado.png" alt="Meguy Prado" width="40" height="40" loading="lazy">
+              </div>
+              <div>
+                <cite>Meguy Prado</cite>
+                <span>PMO · PMBASIS</span>
+              </div>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5: AUTORIDADE COM CONEXÃO HUMANA -->
     <section class="trajetoria section--dark" id="trajetoria">
       <div class="container">
         <div class="section-header reveal">
@@ -422,109 +759,6 @@
 
         <div class="trajetoria__cta reveal">
           <a href="#" class="btn btn--primary" data-sessao-modal>Quero aplicar para a mentoria</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SEÇÃO 5: PROVA SOCIAL -->
-    <section class="social-proof section--dark" id="depoimentos">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="section-label">
-            <span>Credibilidade</span>
-            <span>Entrega comprovada</span>
-          </div>
-          <h2>Impacto validado por líderes que estavam no mesmo ponto que você</h2>
-        </div>
-
-        <div class="testimonials__grid reveal">
-          <article class="testimonial">
-            <div class="testimonial__stars" aria-label="5 estrelas">★★★★★</div>
-            <blockquote>
-              Deu certo… estou muito feliz e você contribuiu muito! Obrigada por me fazer ver meus pontos fortes, ser mais estratégica e abrir meus olhos. <em>Você é um mentor 1000.</em>
-            </blockquote>
-            <footer>
-              <div class="testimonial__avatar testimonial__avatar--photo">
-                <img src="assets/img/testimonials/mariana-montenegro.png" alt="Mariana Montenegro" width="40" height="40" loading="lazy">
-              </div>
-              <div>
-                <cite>Mariana Montenegro</cite>
-                <span>Aprovada vaga PMO | EY</span>
-              </div>
-            </footer>
-          </article>
-          <article class="testimonial">
-            <div class="testimonial__stars" aria-label="5 estrelas">★★★★★</div>
-            <blockquote>
-              Insights para melhorar minha performance como PO. Reestruturei upstream e downstream, estreitei relação com PMs e identifiquei gargalos — elaborando propostas de melhoria.
-            </blockquote>
-            <footer>
-              <div class="testimonial__avatar testimonial__avatar--photo">
-                <img src="assets/img/testimonials/michele-salles.png" alt="Michele Salles" width="40" height="40" loading="lazy">
-              </div>
-              <div>
-                <cite>Michele Salles</cite>
-                <span>Product Owner · Equals</span>
-              </div>
-            </footer>
-          </article>
-          <article class="testimonial">
-            <div class="testimonial__stars" aria-label="5 estrelas">★★★★★</div>
-            <blockquote>
-              Troca muito bacana e expertise do mentor em testes regressivos. Consegui resultados na evolução ágil que estou liderando.
-            </blockquote>
-            <footer>
-              <div class="testimonial__avatar testimonial__avatar--photo">
-                <img src="assets/img/testimonials/edson-miranda.png" alt="Edson Miranda" width="40" height="40" loading="lazy">
-              </div>
-              <div>
-                <cite>Edson Miranda</cite>
-                <span>Coord. Sistemas · CredSystems</span>
-              </div>
-            </footer>
-          </article>
-          <article class="testimonial">
-            <blockquote>
-              Liderança fora de série, excelente comunicador. Recomendo — sabe dar excelentes mentorias para agilidade, projetos e produtos.
-            </blockquote>
-            <footer>
-              <div class="testimonial__avatar testimonial__avatar--photo">
-                <img src="assets/img/testimonials/ronald-petrotheli.png" alt="Ronald Petrotheli" width="40" height="40" loading="lazy">
-              </div>
-              <div>
-                <cite>Ronald Petrotheli</cite>
-                <span>Gerente de Projetos · PMO</span>
-              </div>
-            </footer>
-          </article>
-          <article class="testimonial">
-            <blockquote>
-              Me ajudou em uma fase de transição de carreira — direcionando habilidades, competências-chave e posicionamento na prática. <em>Profissional ímpar e mente brilhante.</em>
-            </blockquote>
-            <footer>
-              <div class="testimonial__avatar testimonial__avatar--photo">
-                <img src="assets/img/testimonials/leonardo-laguna.png" alt="Leonardo Laguna" width="40" height="40" loading="lazy">
-              </div>
-              <div>
-                <cite>Leonardo Laguna</cite>
-                <span>Product Manager</span>
-              </div>
-            </footer>
-          </article>
-          <article class="testimonial">
-            <blockquote>
-              Direcionamento fundamental sobre gestão, consegue abordar o Ágil além do Software.
-            </blockquote>
-            <footer>
-              <div class="testimonial__avatar testimonial__avatar--photo">
-                <img src="assets/img/testimonials/meguy-prado.png" alt="Meguy Prado" width="40" height="40" loading="lazy">
-              </div>
-              <div>
-                <cite>Meguy Prado</cite>
-                <span>PM Knowledge · PMBASIS</span>
-              </div>
-            </footer>
-          </article>
         </div>
       </div>
     </section>
