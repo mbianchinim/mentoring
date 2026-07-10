@@ -5,10 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Mentoria Líder Estratégico com Mateus Bianchini. Saia do operacional, domine métricas de fluxo e assuma liderança estratégica em 12 semanas. Sessão Estratégica Gratuita.">
   <title>Mentoria Líder Estratégico | Mateus Bianchini</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JHHJNTN9CK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JHHJNTN9CK');
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20260710b">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260710c">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <style>
@@ -912,8 +920,28 @@
       var form = document.getElementById('sessaoForm');
       var whatsapp = (window.SITE_CONFIG && window.SITE_CONFIG.whatsapp) || '5548998259798';
 
-      function openModal(e) {
+      function trackEvent(name, params) {
+        if (typeof gtag === 'function') {
+          gtag('event', name, params || {});
+        }
+      }
+
+      function getCtaLocation(btn) {
+        var section = btn.closest('section[id], header');
+        if (section && section.id) return section.id;
+        if (section && section.tagName === 'HEADER') return 'header';
+        return 'unknown';
+      }
+
+      function openModal(e, trigger) {
         if (e) e.preventDefault();
+        var location = trigger ? getCtaLocation(trigger) : 'unknown';
+        var label = trigger ? (trigger.textContent || '').trim() : '';
+        trackEvent('cta_click', {
+          cta_location: location,
+          cta_text: label
+        });
+        trackEvent('modal_open', { cta_location: location });
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
         document.body.classList.add('modal-open');
@@ -928,7 +956,9 @@
       }
 
       document.querySelectorAll('[data-sessao-modal]').forEach(function (btn) {
-        btn.addEventListener('click', openModal);
+        btn.addEventListener('click', function (e) {
+          openModal(e, btn);
+        });
       });
 
       document.querySelectorAll('[data-sessao-close]').forEach(function (el) {
@@ -953,6 +983,15 @@
           '*Maior desafio:* ' + data.get('desafio'),
           '*Expectativa com a mentoria:* ' + data.get('expectativa')
         ].join('\n');
+
+        trackEvent('generate_lead', {
+          cargo: data.get('cargo'),
+          faixa_salarial: data.get('faixa_salarial')
+        });
+        trackEvent('whatsapp_redirect', {
+          cargo: data.get('cargo'),
+          faixa_salarial: data.get('faixa_salarial')
+        });
 
         window.open('https://wa.me/' + whatsapp + '?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
         closeModal();
